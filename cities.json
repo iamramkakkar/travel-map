@@ -1,32 +1,17 @@
 [
   {
     "name": "New York",
-    "country": "USA",
-    "coordinates": [
-      40.7128,
-      -74.006
-    ],
-    "year": 2022,
-    "photo": "https://iamramkakkar.github.io/travel-map/img/2025/london.png"
+    "lat": 40.7128,
+    "lng": -74.006
   },
   {
-    "name": "Paris",
-    "country": "France",
-    "coordinates": [
-      48.8566,
-      2.3522
-    ],
-    "year": 2023,
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_as_seen_from_the_Tour_Saint-Jacques_2011_01.jpg"
+    "name": "London",
+    "lat": 51.5074,
+    "lng": -0.1278
   },
   {
     "name": "Tokyo",
-    "country": "Japan",
-    "coordinates": [
-      35.6895,
-      139.6917
-    ],
-    "year": 2023,
-    "photo": ""
+    "lat": 35.6895,
+    "lng": 139.6917
   }
 ]

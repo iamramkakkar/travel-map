@@ -1,123 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Travel Map</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <meta charset="utf-8" />
+  <title>Cities Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f8f8f8;
-    }
-    header {
-      background-color: #ffffff;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-    #filter-container {
-      margin: 10px auto;
-      text-align: center;
-    }
-    select {
-      padding: 8px 12px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      margin-top: 10px;
-    }
-    #map-container {
-      margin: 20px auto;
-      max-width: 1200px;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    }
-    #map {
-      height: 80vh;
-      width: 100%;
-    }
-    .leaflet-popup-content-wrapper {
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    }
-    .leaflet-popup-content {
-      font-size: 14px;
-      padding: 8px;
-    }
-    .popup-img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin-bottom: 8px;
-    }
+    body, html { margin: 0; padding: 0; height: 100%; }
+    #map { width: 100%; height: 100%; }
   </style>
 </head>
 <body>
-  <header>🌍 Cities I’ve Visited</header>
-  <div id="filter-container">
-    <label for="yearSelect">Filter by Year: </label>
-    <select id="yearSelect">
-      <option value="all">All Years</option>
-    </select>
-  </div>
-  <div id="map-container">
-    <div id="map"></div>
-  </div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    const cities = [
-      {
-        "name": "London",
-        "country": "UK",
-        "coordinates": [51.5074, -0.1278],
-        "year": 2025,
-        "photo": "https://superman.github.io/travel-map/img/2025/london.png"
-      }
-    ];
-
-    const map = L.map('map').setView([20, 0], 2);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
-    }).addTo(map);
-
-    let markers = [];
-
-    function addMarkers(year) {
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-
-      cities.forEach(function(city) {
-        if (year === 'all' || city.year == year) {
-          var popup = "<div style='text-align:center'>";
-          if (city.photo) {
-            popup += "<img src='" + city.photo + "' class='popup-img' alt='City photo' />";
-          }
-          popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em></div>";
-          var marker = L.marker(city.coordinates).addTo(map)
-            .bindPopup(popup);
-          markers.push(marker);
-        }
-      });
-    }
-
-    const yearSelect = document.getElementById('yearSelect');
-    const years = [...new Set(cities.map(c => c.year))].sort();
-    years.forEach(function(y) {
-      const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = y;
-      yearSelect.appendChild(opt);
-    });
-
-    addMarkers('all');
-    yearSelect.addEventListener('change', function() {
-      addMarkers(yearSelect.value);
-    });
-  </script>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
