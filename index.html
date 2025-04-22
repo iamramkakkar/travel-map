@@ -72,25 +72,11 @@
   <script>
     const cities = [
       {
-        "name": "New York",
-        "country": "USA",
-        "coordinates": [40.7128, -74.0060],
-        "year": 2022,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Lower_Manhattan_from_Jersey_City_November_2014_panorama_3.jpg"
-      },
-      {
-        "name": "Paris",
-        "country": "France",
-        "coordinates": [48.8566, 2.3522],
-        "year": 2023,
-        "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_as_seen_from_the_Tour_Saint-Jacques_2011_01.jpg"
-      },
-      {
-        "name": "Tokyo",
-        "country": "Japan",
-        "coordinates": [35.6895, 139.6917],
-        "year": 2023,
-        "photo": ""
+        "name": "London",
+        "country": "UK",
+        "coordinates": [51.5074, -0.1278],
+        "year": 2025,
+        "photo": "https://superman.github.io/travel-map/img/2025/london.png"
       }
     ];
 
@@ -107,11 +93,11 @@
 
       cities.forEach(function(city) {
         if (year === 'all' || city.year == year) {
-          var popup = "";
+          var popup = "<div style='text-align:center'>";
           if (city.photo) {
-            popup += '<img src="' + city.photo + '" class="popup-img" />';
+            popup += "<img src='" + city.photo + "' class='popup-img' alt='City photo' />";
           }
-          popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em>";
+          popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em></div>";
           var marker = L.marker(city.coordinates).addTo(map)
             .bindPopup(popup);
           markers.push(marker);
