@@ -1,30 +1,37 @@
 fetch('cities.json')
-  .then(response => response.json())
+  .then(r => r.json())
   .then(cities => {
-    // initialize map centered at [0,0], zoom 2
-    var map = L.map('map').setView([0, 0], 2);
+    // world bounds [south‑west, north‑east]
+    const worldBounds = [[-90, -180], [90, 180]];
 
-    // add tile layer WITHOUT wrapping
+    // initialize map with maxBounds so you can’t pan outside
+    const map = L.map('map', {
+      center: [0, 0],
+      zoom: 2,
+      maxBounds: worldBounds,
+      maxBoundsViscosity: 1.0,  // “stick” at the edges
+      worldCopyJump: false      // don’t jump tiles at antimeridian
+    });
+
+    // tile layer: noWrap + bounds prevents infinite wrapping
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
       attribution: '© OpenStreetMap',
-      noWrap: true             // <- disables infinite horizontal tiles
+      maxZoom: 19,
+      noWrap: true,
+      bounds: worldBounds
     }).addTo(map);
 
-    // OPTIONAL: lock map so you can’t pan outside the world
-    map.setMaxBounds([[-90, -180], [90, 180]]);
-
-    // add your city markers
-    var markers = cities.map(city =>
-      L.marker([city.lat, city.lng])
+    // add city markers
+    const markers = cities.map(c =>
+      L.marker([c.lat, c.lng])
        .addTo(map)
-       .bindPopup(city.name)
+       .bindPopup(c.name)
     );
 
-    // zoom/map‐fit so all markers are visible
+    // fit to markers
     if (markers.length) {
-      var group = L.featureGroup(markers);
-      map.fitBounds(group.getBounds().pad(0.2));
+      const grp = L.featureGroup(markers);
+      map.fitBounds(grp.getBounds().pad(0.2));
     }
   })
-  .catch(err => console.error(err));
+  .catch(console.error);
