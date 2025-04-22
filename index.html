@@ -70,6 +70,30 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
+    const cities = [
+      {
+        "name": "New York",
+        "country": "USA",
+        "coordinates": [40.7128, -74.0060],
+        "year": 2022,
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Lower_Manhattan_from_Jersey_City_November_2014_panorama_3.jpg"
+      },
+      {
+        "name": "Paris",
+        "country": "France",
+        "coordinates": [48.8566, 2.3522],
+        "year": 2023,
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_as_seen_from_the_Tour_Saint-Jacques_2011_01.jpg"
+      },
+      {
+        "name": "Tokyo",
+        "country": "Japan",
+        "coordinates": [35.6895, 139.6917],
+        "year": 2023,
+        "photo": ""
+      }
+    ];
+
     const map = L.map('map').setView([20, 0], 2);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
@@ -77,41 +101,37 @@
 
     let markers = [];
 
-    function addMarkers(cities, year) {
+    function addMarkers(year) {
       markers.forEach(m => map.removeLayer(m));
       markers = [];
 
-      cities.forEach(city => {
+      cities.forEach(function(city) {
         if (year === 'all' || city.year == year) {
-          const popupContent = \`
-            \${city.photo ? '<img src="\${city.photo}" class="popup-img" />' : ''}
-            <strong>\${city.name}</strong><br>\${city.country}<br><em>\${city.year}</em>
-          \`;
-          const marker = L.marker(city.coordinates).addTo(map)
-            .bindPopup(popupContent);
+          var popup = "";
+          if (city.photo) {
+            popup += '<img src="' + city.photo + '" class="popup-img" />';
+          }
+          popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em>";
+          var marker = L.marker(city.coordinates).addTo(map)
+            .bindPopup(popup);
           markers.push(marker);
         }
       });
     }
 
-    fetch('cities.json')
-      .then(response => response.json())
-      .then(cities => {
-        const yearSelect = document.getElementById('yearSelect');
-        const years = [...new Set(cities.map(c => c.year))].sort();
-        years.forEach(y => {
-          const opt = document.createElement('option');
-          opt.value = y;
-          opt.textContent = y;
-          yearSelect.appendChild(opt);
-        });
+    const yearSelect = document.getElementById('yearSelect');
+    const years = [...new Set(cities.map(c => c.year))].sort();
+    years.forEach(function(y) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      yearSelect.appendChild(opt);
+    });
 
-        addMarkers(cities, 'all');
-
-        yearSelect.addEventListener('change', () => {
-          addMarkers(cities, yearSelect.value);
-        });
-      });
+    addMarkers('all');
+    yearSelect.addEventListener('change', function() {
+      addMarkers(yearSelect.value);
+    });
   </script>
 </body>
 </html>
