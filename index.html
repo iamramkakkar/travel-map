@@ -88,7 +88,7 @@
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
-      noWrap: true,
+      noWrap: true
     }).addTo(map);
 
     let markers = [];
@@ -104,8 +104,7 @@
             popup += "<img src='" + city.photo + "' class='popup-img' alt='City photo' />";
           }
           popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em></div>";
-          var marker = L.marker(city.coordinates).addTo(map)
-            .bindPopup(popup);
+          var marker = L.marker(city.coordinates).addTo(map).bindPopup(popup);
           markers.push(marker);
         }
       });
