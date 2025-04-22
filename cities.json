@@ -5,7 +5,9 @@
     "coordinates": [
       40.7128,
       -74.006
-    ]
+    ],
+    "year": 2022,
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Lower_Manhattan_from_Jersey_City_November_2014_panorama_3.jpg"
   },
   {
     "name": "Paris",
@@ -13,6 +15,18 @@
     "coordinates": [
       48.8566,
       2.3522
-    ]
+    ],
+    "year": 2023,
+    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_as_seen_from_the_Tour_Saint-Jacques_2011_01.jpg"
+  },
+  {
+    "name": "Tokyo",
+    "country": "Japan",
+    "coordinates": [
+      35.6895,
+      139.6917
+    ],
+    "year": 2023,
+    "photo": ""
   }
 ]

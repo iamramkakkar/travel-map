@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #f8f8f8;
     }
     header {
       background-color: #ffffff;
@@ -19,6 +19,17 @@
       font-weight: bold;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+    #filter-container {
+      margin: 10px auto;
+      text-align: center;
+    }
+    select {
+      padding: 8px 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
     #map-container {
       margin: 20px auto;
       max-width: 1200px;
@@ -27,7 +38,7 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
     #map {
-      height: 85vh;
+      height: 80vh;
       width: 100%;
     }
     .leaflet-popup-content-wrapper {
@@ -38,10 +49,21 @@
       font-size: 14px;
       padding: 8px;
     }
+    .popup-img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
   </style>
 </head>
 <body>
   <header>🌍 Cities I’ve Visited</header>
+  <div id="filter-container">
+    <label for="yearSelect">Filter by Year: </label>
+    <select id="yearSelect">
+      <option value="all">All Years</option>
+    </select>
+  </div>
   <div id="map-container">
     <div id="map"></div>
   </div>
@@ -53,14 +75,41 @@
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
     }).addTo(map);
 
+    let markers = [];
+
+    function addMarkers(cities, year) {
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+
+      cities.forEach(city => {
+        if (year === 'all' || city.year == year) {
+          const popupContent = \`
+            \${city.photo ? '<img src="\${city.photo}" class="popup-img" />' : ''}
+            <strong>\${city.name}</strong><br>\${city.country}<br><em>\${city.year}</em>
+          \`;
+          const marker = L.marker(city.coordinates).addTo(map)
+            .bindPopup(popupContent);
+          markers.push(marker);
+        }
+      });
+    }
+
     fetch('cities.json')
       .then(response => response.json())
       .then(cities => {
-        cities.forEach(city => {
-          const marker = L.marker(city.coordinates).addTo(map);
-          marker.bindPopup(
-            `<strong>${city.name}</strong><br>${city.country}`
-          );
+        const yearSelect = document.getElementById('yearSelect');
+        const years = [...new Set(cities.map(c => c.year))].sort();
+        years.forEach(y => {
+          const opt = document.createElement('option');
+          opt.value = y;
+          opt.textContent = y;
+          yearSelect.appendChild(opt);
+        });
+
+        addMarkers(cities, 'all');
+
+        yearSelect.addEventListener('change', () => {
+          addMarkers(cities, yearSelect.value);
         });
       });
   </script>
