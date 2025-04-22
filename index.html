@@ -70,16 +70,6 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const cities = [
-      {
-        "name": "London",
-        "country": "UK",
-        "coordinates": [51.5074, -0.1278],
-        "year": 2025,
-        "photo": "https://superman.github.io/travel-map/img/2025/london.png"
-      }
-    ];
-
     const map = L.map('map', {
       worldCopyJump: false,
       maxBounds: [[-85, -180], [85, 180]],
@@ -88,41 +78,47 @@
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
-      noWrap: true
+      noWrap: true,
     }).addTo(map);
 
     let markers = [];
 
-    function addMarkers(year) {
+    function addMarkers(cities, year) {
       markers.forEach(m => map.removeLayer(m));
       markers = [];
 
       cities.forEach(function(city) {
         if (year === 'all' || city.year == year) {
-          var popup = "<div style='text-align:center'>";
+          let popup = "<div style='text-align:center'>";
           if (city.photo) {
             popup += "<img src='" + city.photo + "' class='popup-img' alt='City photo' />";
           }
           popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em></div>";
-          var marker = L.marker(city.coordinates).addTo(map).bindPopup(popup);
+          const marker = L.marker(city.coordinates).addTo(map).bindPopup(popup);
           markers.push(marker);
         }
       });
     }
 
-    const yearSelect = document.getElementById('yearSelect');
-    const years = [...new Set(cities.map(c => c.year))].sort();
-    years.forEach(function(y) {
-      const opt = document.createElement('option');
-      opt.value = y;
-      opt.textContent = y;
-      yearSelect.appendChild(opt);
-    });
+    fetch('cities.json')
+      .then(response => response.json())
+      .then(cities => {
+        const yearSelect = document.getElementById('yearSelect');
+        const years = [...new Set(cities.map(c => c.year))].sort();
+        years.forEach(function(y) {
+          const opt = document.createElement('option');
+          opt.value = y;
+          opt.textContent = y;
+          yearSelect.appendChild(opt);
+        });
 
-    addMarkers('all');
-    yearSelect.addEventListener('change', function() {
-      addMarkers(yearSelect.value);
-    });
+        addMarkers(cities, 'all');
+
+        yearSelect.addEventListener('change', function() {
+          addMarkers(cities, yearSelect.value);
+        });
+      })
+      .catch(error => console.error('Error loading cities:', error));
   </script>
 </body>
 </html>
