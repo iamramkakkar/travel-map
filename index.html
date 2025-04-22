@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Travel Map</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <style>
     body {
       margin: 0;
@@ -69,6 +71,7 @@
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
     const map = L.map('map', {
       worldCopyJump: false,
@@ -81,12 +84,14 @@
       noWrap: true,
     }).addTo(map);
 
-    let markers = [];
+    let markersGroup = L.markerClusterGroup();
 
     function addMarkers(cities, year) {
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-
+      if (map.hasLayer(markersGroup)) {
+        map.removeLayer(markersGroup);
+      }
+      markersGroup = L.markerClusterGroup();
+      
       cities.forEach(function(city) {
         if (year === 'all' || city.year == year) {
           let popup = "<div style='text-align:center'>";
@@ -94,10 +99,12 @@
             popup += "<img src='" + city.photo + "' class='popup-img' alt='City photo' />";
           }
           popup += "<strong>" + city.name + "</strong><br>" + city.country + "<br><em>" + city.year + "</em></div>";
-          const marker = L.marker(city.coordinates).addTo(map).bindPopup(popup);
-          markers.push(marker);
+          const marker = L.marker(city.coordinates).bindPopup(popup);
+          markersGroup.addLayer(marker);
         }
       });
+
+      map.addLayer(markersGroup);
     }
 
     fetch('cities.json')
