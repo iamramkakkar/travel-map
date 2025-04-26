@@ -2,31 +2,71 @@
   {
     "name": "New York",
     "country": "USA",
-    "coordinates": [
-      40.7128,
-      -74.006
-    ],
+    "coordinates": [40.7128,-74.006],
     "year": 2022,
     "photo": "https://iamramkakkar.github.io/travel-map/img/2025/london.png"
   },
   {
-    "name": "Paris",
-    "country": "France",
-    "coordinates": [
-      48.8566,
-      2.3522
-    ],
-    "year": 2023,
-    "photo": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_as_seen_from_the_Tour_Saint-Jacques_2011_01.jpg"
+    "name": "Delhi",
+    "country": "India",
+    "coordinates": [28.7041, 77.1025],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/delhi.png"
   },
   {
-    "name": "Tokyo",
-    "country": "Japan",
-    "coordinates": [
-      35.6895,
-      139.6917
-    ],
-    "year": 2023,
-    "photo": ""
+    "name": "Jaipur",
+    "country": "India",
+    "coordinates": [26.9221, 75.7789],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/jaipur.png"
+  },
+  {
+    "name": "Mumbai",
+    "country": "India",
+    "coordinates": [19.0760, 72.8777],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/mumbai.png"
+  },
+  {
+    "name": "Kota",
+    "country": "India",
+    "coordinates": [25.2138, 75.8648],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/kota.png"
+  },
+  {
+    "name": "Haridwar",
+    "country": "India",
+    "coordinates": [29.9457, 78.1642],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/haridwar.png"
+  },
+  {
+    "name": "Rishikesh",
+    "country": "India",
+    "coordinates": [30.0869, 78.2676],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/rishikesh.png"
+  },
+  {
+    "name": "Bangalore",
+    "country": "India",
+    "coordinates": [12.9716, 77.5946],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/bangalore.png"
+  },
+  {
+    "name": "Goa",
+    "country": "India",
+    "coordinates": [15.2993, 74.1240],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/goa.png"
+  },
+  {
+    "name": "Ahmedabad",
+    "country": "India",
+    "coordinates": [23.0258, 72.5873],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/ahmedabad.png"
   }
 ]
