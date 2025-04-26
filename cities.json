@@ -1,12 +1,5 @@
 [
   {
-    "name": "New York",
-    "country": "USA",
-    "coordinates": [40.7128,-74.006],
-    "year": 2022,
-    "photo": "https://iamramkakkar.github.io/travel-map/img/2025/london.png"
-  },
-  {
     "name": "Delhi",
     "country": "India",
     "coordinates": [28.7041, 77.1025],
