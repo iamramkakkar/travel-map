@@ -78,12 +78,12 @@
       //maxBounds: [[-85, -180], [85, 180]],
       //maxBoundsViscosity: 1.0
       continuousWorld: false, // (optional) older Leaflet versions needed this
-      noWrap: false          // Allow wrapping (default is false, but safe to ensure)
+      noWrap: true          // Allow wrapping (default is false, but safe to ensure)
     }).setView([20, 0], 2);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://carto.com/">CARTO</a> contributors',
-      noWrap: false,
+      noWrap: true,
     }).addTo(map);
 
     let markersGroup = L.markerClusterGroup();
