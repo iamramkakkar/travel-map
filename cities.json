@@ -68,5 +68,47 @@
     "coordinates": [23.0258, 72.5873],
     "year": 2025,
     "photo": "https://helloworld.github.io/travel-map/img/2025/ahmedabad.png"
+  },
+  {
+    "name": "Abohar",
+    "country": "India",
+    "coordinates": [30.14453, 74.19552],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/abohar.png"
+  },
+  {
+    "name": "Bathinda",
+    "country": "India",
+    "coordinates": [30.210995, 74.945473],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/bathinda.png"
+  },
+  {
+    "name": "Malout",
+    "country": "India",
+    "coordinates": [30.191515, 74.497864],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/malout.png"
+  },
+  {
+    "name": "Chandigarh",
+    "country": "India",
+    "coordinates": [30.733315, 76.779418],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/chandigarh.png"
+  },
+  {
+    "name": "Katra",
+    "country": "India",
+    "coordinates": [32.99167, 74.93195],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/katra.png"
+  },
+  {
+    "name": "Jammu",
+    "country": "India",
+    "coordinates": [32.732998, 74.864273],
+    "year": 2025,
+    "photo": "https://helloworld.github.io/travel-map/img/2025/jammu.png"
   }
 ]
