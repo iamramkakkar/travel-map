@@ -74,11 +74,10 @@
   <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script>
     const map = L.map('map', {
-      worldCopyJump: true,
-      //maxBounds: [[-85, -180], [85, 180]],
-      //maxBoundsViscosity: 1.0
-      continuousWorld: false, // (optional) older Leaflet versions needed this
-      noWrap: true          // Allow wrapping (default is false, but safe to ensure)
+      maxBounds: [[-85, -180], [85, 180]],
+      maxBoundsViscosity: 1.0,
+      worldCopyJump: false,
+      noWrap: true
     }).setView([20, 0], 2);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
